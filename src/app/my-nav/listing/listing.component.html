@@ -1,0 +1,37 @@
+<div class="card-block">
+  <h4 class="card-title">Listing Here</h4>
+  <p class="card-text">For example this line of text and Listing</p>
+  <a href="#" class="btn btn-primary">Listing</a>
+</div>
+<mat-list style="background-color: darkcyan" dense>
+  <mat-list-item *ngFor="let x of data">{{x.id}}</mat-list-item>
+  <!-- <mat-list-item>{{x.Name}}</mat-list-item>
+  <mat-list-item>{{x.Type}}</mat-list-item> -->
+</mat-list>
+<div class="container">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+<div class="container">
+  <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" matSortDirection="asc">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header="id">id</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element?.id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header='name'>name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header='email'>email</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element?.email}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </mat-table>
+</div>
